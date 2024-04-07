@@ -1,5 +1,5 @@
 # ==============================================================================
-# 用来进行编译的 Makefile
+# used to compilation Makefile
 #
 
 GO := go
@@ -29,12 +29,12 @@ ifeq ($(BINS),)
   $(error Could not determine BINS, set ROOT_DIR or run in source dir)
 endif
 
-.PHONY: go.build.verify ## 检查 go 命令行工具是否安装.
+.PHONY: go.build.verify ## check go tool
 go.build.verify:
 	@if ! which go &>/dev/null; then echo "Cannot found go compile tool. Please install go tool first."; exit 1; fi
 
 .PHONY: go.build.%
-go.build.%: ## 编译 Go 源码.
+go.build.%: ## compile source code
 	$(eval COMMAND := $(word 2,$(subst ., ,$*)))
 	$(eval PLATFORM := $(word 1,$(subst ., ,$*)))
 	$(eval OS := $(word 1,$(subst _, ,$(PLATFORM))))
@@ -44,31 +44,31 @@ go.build.%: ## 编译 Go 源码.
 	@CGO_ENABLED=0 GOOS=$(OS) GOARCH=$(ARCH) $(GO) build $(GO_BUILD_FLAGS) -o $(OUTPUT_DIR)/platforms/$(OS)/$(ARCH)/$(COMMAND)$(GO_OUT_EXT) $(ROOT_PACKAGE)/cmd/$(COMMAND)
 
 .PHONY: go.build
-go.build: go.build.verify $(addprefix go.build., $(addprefix $(PLATFORM)., $(BINS))) # 根据指定的平台编译源码.
+go.build: go.build.verify $(addprefix go.build., $(addprefix $(PLATFORM)., $(BINS))) ## compile code according to specific platform
 
 .PHONY: go.format
-go.format: tools.verify.goimports ## 格式化 Go 源码.
+go.format: tools.verify.goimports ## format code
 	@$(FIND) -type f -name '*.go' | $(XARGS) gofmt -s -w
 	@$(FIND) -type f -name '*.go' | $(XARGS) goimports -w -local $(ROOT_PACKAGE)
 	@$(GO) mod edit -fmt
 
 .PHONY: go.tidy
-go.tidy: ## 自动添加/移除依赖包.
+go.tidy: ## automatically add or remove dependency
 	@$(GO) mod tidy
 
 .PHONY: go.test
-go.test: ## 执行单元测试.
+go.test: ## run test
 	@echo "===========> Run unit test"
 	@mkdir -p $(OUTPUT_DIR)
 	@set -o pipefail;$(GO) test -race -cover -coverprofile=$(OUTPUT_DIR)/coverage.out -timeout=10m -shuffle=on -short -v `go list ./...`
-	@sed -i '/mock_.*.go/d' $(OUTPUT_DIR)/coverage.out # 从 coverage 中删除mock_.*.go 文件
-	@sed -i '/internal\/miniblog\/store\/.*.go/d' $(OUTPUT_DIR)/coverage.out # internal/miniblog/store/ 下的 Go 代码不参与覆盖率计算（这部分测试用例稍后补上）
+	@sed -i '/mock_.*.go/d' $(OUTPUT_DIR)/coverage.out # remove mock_.*.go from coverage
+	@sed -i '/internal\/miniblog\/store\/.*.go/d' $(OUTPUT_DIR)/coverage.out # remove internal/miniblog/store/.*.go from coverage.out
 
 .PHONY: go.cover
-go.cover: go.test ## 执行单元测试，并校验覆盖率阈值.
+go.cover: go.test ## do run test case and verify coverage against target
 	@$(GO) tool cover -func=$(OUTPUT_DIR)/coverage.out | awk -v target=$(COVERAGE) -f $(ROOT_DIR)/scripts/coverage.awk
 
 .PHONY: go.lint
-go.lint: tools.verify.golangci-lint ## 执行静态代码检查.
+go.lint: tools.verify.golangci-lint ## run code static check.
 	@echo "===========> Run golangci to lint source codes"
 	@golangci-lint run -c $(ROOT_DIR)/.golangci.yaml $(ROOT_DIR)/...
