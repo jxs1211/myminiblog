@@ -6,7 +6,13 @@
 package id
 
 import (
+	"context"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -36,4 +42,37 @@ func BenchmarkGenShortIDTimeConsuming(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		GenShortID()
 	}
+}
+
+func workIn2Minute() {
+	log.Println("starting to work")
+	time.Sleep(10 * time.Second)
+}
+
+func doWork(ctx context.Context, d time.Duration) {
+	// now := time.Now()
+	delay := time.NewTicker(d)
+
+	for {
+		workIn2Minute()
+		delay.Reset(d)
+
+		// delay.Stop()
+		select {
+		case <-ctx.Done():
+			delay.Stop()
+		case <-delay.C:
+		}
+	}
+}
+
+func TestOverlappingTickerTask(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	go doWork(ctx, time.Second*2)
+	// Create a channel to receive OS signals
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGTERM) // Register for SIGTERM signal
+
+	<-sigChan
+	cancel()
 }

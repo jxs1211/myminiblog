@@ -1,69 +1,68 @@
-## miniblog 项目
+## miniblog Project
 
-miniblog（微型博客） 是一个 Go 语言入门项目，用来完成用户注册、博客创建等业务。miniblog 入门但不简单：
+miniblog is a beginner-level Go project used to implement user registration, blog creation, and other functionalities. miniblog is both beginner-friendly and comprehensive:
 
-- **入门：** 适用于刚学习完 Go 基础语法，零项目开发经验的 Go 开发者；
-- **不简单：** 本项目来自于一线企业的大型线上项目，项目本身是一个企业级的项目，学习完之后，完全可以用来作为企业级项目的开发脚手架。
+- **Beginner-friendly:** It is suitable for Go developers who have just learned the basic syntax of Go and have no prior experience in project development.
+- **Comprehensive:** This project originates from a large-scale online project of a first-tier enterprise. After learning miniblog, you will be equipped with the necessary knowledge to develop enterprise-level projects.
 
-miniblog 实现了以下 2 类功能：
-- **用户管理：** 支持 用户注册、用户登录、获取用户列表、获取用户详情、更新用户信息、修改用户密码、注销用户 7 种用户操作；
-- **博客管理：** 支持 创建博客、获取博客列表、获取博客详情、更新博客内容、删除博客、批量删除博客 6 种博客操作。
+miniblog implements the following two types of functionalities:
+- **User management:** It supports 7 user operations, including user registration, user login, fetching user list, fetching user details, updating user information, changing user password, and user logout.
+- **Blog management:** It supports 6 blog operations, including creating a blog, fetching blog list, fetching blog details, updating blog content, deleting a blog, and batch deleting blogs.
 
-**本项目适合人群**
+**This project is for**
 
-- 刚学习完 Go 基础语法，想快速学习，以参与公司 Go 语言开发工作的开发者；
-- 掌握 Go 基础语法，零 Go 应用开发经验，想通过完整的实战，快速、系统的学习 Go 开发的开发者；
-- 有意从事 Go 应用开发，但尚未入门或入门尚浅的开发者；
-- 有过 Go 应用开发经验，但想了解某一部分开发方法的开发者。
+- Beginners who have just completed learning the basic syntax of Go and want to quickly learn and participate in Go language development in a company.
+- Individuals who have a grasp of the basic syntax of Go but have zero experience in building Go application  and want to learn Go development in a fast and right way through practical experience.
+- Those who are interested in Go application development but are still beginners or have limited experience.
+- Developers who have some experience in Go application development but want to learn advanced development skills.
 
-课程：
+Courses:
 
-- 掘金课程：[从零开发企业级 Go 应用](https://juejin.cn/book/7176608782871429175)
-- 极客时间课程：[Go 语言项目开发实战](https://time.geekbang.org/column/intro/100079601?tab=intro)
+- Juejin Course: [Developing Enterprise-Level Go Applications from Scratch](https://juejin.cn/book/7176608782871429175)
+- Geek Time Course: [Practical Go Language Project Development](https://time.geekbang.org/column/intro/100079601?tab=intro)
 
 ## Features
 
-- 使用了简洁架构；
-- 使用众多常用的 Go 包：gorm, casbin, govalidator, jwt-go, gin, cobra, viper, pflag, zap, pprof, grpc, protobuf 等；
-- 规范的目录结构，使用 [project-layout](https://github.com/golang-standards/project-layout) 目录规范；
-- 具备认证(JWT)和授权功能(casbin)；
-- 独立设计的 log 包、error 包；
-- 使用高质量的 Makefile 管理项目；
-- 静态代码检查；
-- 带有单元测试、性能测试、模糊测试、Mock 测试测试案例；
-- 丰富的 Web 功能（调用链、优雅关停、中间件、跨域、异常恢复等）；
-  - HTTP、HTTPS、gRPC 服务器实现；
-  - JSON、Protobuf 数据交换格式实现；
-- 项目遵循众多开发规范：代码规范、版本规范、接口规范、日志规范、错误规范、提交规范等；
-- 访问 MySQL 编程实现；
-- 实现的业务功能：用户管理、博客管理；
-- RESTful API 设计规范；
-- OpenAPI 3.0/Swagger 2.0 API 文档；
-- 配套有高质量的掘金课程；
+- Inspired by concept of clean architecture.
+- Uses most commonly used Go packages such as gorm, casbin, govalidator, jwt-go, gin, cobra, viper, pflag, zap, pprof, grpc, protobuf, and more.
+- Follows a standardized directory structure based on the [project-layout](https://github.com/golang-standards/project-layout) convention.
+- Includes authentication (JWT) and authorization (casbin) capabilities.
+- Includes independently designed log and error packages.
+- Utilizes a high-quality Makefile for project management.
+- Static code analysis.
+- Includes unit tests, performance tests, fuzz tests, and sample tests.
+- Provides rich web functionality such as call chains, graceful shutdown, middleware, cross-origin resource sharing (CORS), and exception recovery.
+  - Implements HTTP, HTTPS, and gRPC servers.
+  - Supports JSON and Protobuf as data exchange formats.
+- Adheres to various development standards including code style, versioning, interface design, logging, error handling, and commit conventions.
+- Implements MySQL programming for data access.
+- Implements business functionalities for user management and blog management.
+- Follows RESTful API design guidelines.
+- Provides OpenAPI 3.0/Swagger 2.0 API documentation.
 
-> 提示：以上这些功能点，是我根据一线 Go 开发经验，所挑选的核心功能，这些功能也涵盖了 Go 企业应用开发中，大部分的核心功能。通过这些功能可以确保在学习完本项目后，你能够开发一个高质量的企业应用。
+> Note: The above features represent the core functionalities I selected based on senior experience as a Go developer. These functionalities also cover most of the core features in development of enterprise-level Go application . By mastering these functionalities, you will be able to develop high-quality enterprise applications after complete this project.
 
 ## Installation
 
 ```bash
-$ git clone https://github.com/marmotedu/miniblog.git
-$ go work use miniblog # 如果 Go 版本 > 1.18
-$ cd miniblog
-$ make # 编译源码
+$ git clone https://github.com/jxs1211/myminiblog.git
+$ go work use myminiblog # If Go version > 1.18
+$ cd myminiblog
+$ make # Compile the source code
 ```
 
 ## Documentation
 
-- [用户手册](./docs/guide/zh-CN/README.md)
-- [开发手册](./docs/devel/zh-CN/README.md)
+- [User Manual](./docs/guide/zh-CN/README.md)
+- [Developer Manual](./docs/devel/zh-CN/README.md)
 
 ## Contributing
 
-欢迎你贡献代码和 Star !
+You are welcome to contribute code and star the project!
 
-### 开发规范
+### Development Guidelines
 
-本项目遵循以下开发规范：[miniblog 项目开发规范](./docs/devel/zh-CN/conversions/README.md)。
+This project follows the following development guidelines: [miniblog Project Development Guidelines](./docs/devel/zh-CN/conversions/README.md).
 
 ## License
 
