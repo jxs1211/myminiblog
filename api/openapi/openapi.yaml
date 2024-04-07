@@ -1,4 +1,4 @@
-# Copyright 2022 Innkeeper Belm(孔令飞) <nosbelm@qq.com>. All rights reserved.
+# Copyright 2022 Innkeeper Jayflow <jxs121@gmail.com>. All rights reserved.
 # Use of this source code is governed by a MIT style
 # license that can be found in the LICENSE file. The original repo for
 # this file is https://github.com/marmotedu/miniblog.
@@ -12,8 +12,8 @@ info:
   title: miniblog api definition
   description: The API for the miniblog project
   contact:
-    name: Innkeeper Belm(孔令飞)
-    email: nosbelm@qq.com
+    name: Jayflow
+    email: jxs121@gmail.com
     url: https://github.com/colin404
   license:
     name: MIT
@@ -31,26 +31,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoginRequest'
+              $ref: "#/components/schemas/LoginRequest"
       responses:
-        '200':
+        "200":
           description: successfully login
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LoginResponse'
-        '400':
+                $ref: "#/components/schemas/LoginResponse"
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
   /users:
     post:
       tags:
@@ -63,22 +63,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateUserRequest'
+              $ref: "#/components/schemas/CreateUserRequest"
       responses:
-        '200':
+        "200":
           description: successfully create user
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     get:
       tags:
         - users
@@ -96,24 +96,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfully list users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListUserResponse'
-        '400':
+                $ref: "#/components/schemas/ListUserResponse"
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
   /users/{name}:
     get:
       tags:
@@ -127,24 +127,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successfully get user
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetUserResponse'
-        '400':
+                $ref: "#/components/schemas/GetUserResponse"
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     delete:
       tags:
         - users
@@ -157,20 +157,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successfully delete user
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     put:
       tags:
         - users
@@ -182,22 +182,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateUserRequest'
+              $ref: "#/components/schemas/UpdateUserRequest"
       responses:
-        '200':
+        "200":
           description: successfully update user
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
   /users/{name}/change-password:
     put:
       tags:
@@ -210,22 +210,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChangePasswordRequest'
+              $ref: "#/components/schemas/ChangePasswordRequest"
       responses:
-        '200':
+        "200":
           description: successfully update user password
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
   /posts:
     post:
       tags:
@@ -238,22 +238,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePostRequest'
+              $ref: "#/components/schemas/CreatePostRequest"
       responses:
-        '200':
+        "200":
           description: successfully create post
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     get:
       tags:
         - posts
@@ -271,24 +271,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfully list posts
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListPostResponse'
-        '400':
+                $ref: "#/components/schemas/ListPostResponse"
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     delete:
       tags:
         - posts
@@ -303,20 +303,20 @@ paths:
               type: string
               example: post-22z9jl
       responses:
-        '200':
+        "200":
           description: successfully delete posts
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
   /posts/{postID}:
     get:
       tags:
@@ -330,24 +330,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successfully get post
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetPostResponse'
-        '400':
+                $ref: "#/components/schemas/GetPostResponse"
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     delete:
       tags:
         - posts
@@ -360,20 +360,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successfully delete post
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
     put:
       tags:
         - posts
@@ -385,22 +385,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePostRequest'
+              $ref: "#/components/schemas/UpdatePostRequest"
       responses:
-        '200':
+        "200":
           description: successfully update post
-        '400':
+        "400":
           description: request failed due to client-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
-        '500':
+                $ref: "#/components/schemas/ErrResponse"
+        "500":
           description: request failed due to server-side problem
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrResponse'
+                $ref: "#/components/schemas/ErrResponse"
 components:
   schemas:
     LoginRequest:
@@ -444,7 +444,7 @@ components:
         email:
           type: string
           format: email
-          example: nosbelm@qq.com
+          example: jxs121@gmail.com
         phone:
           type: string
           example: 18128845xxx
@@ -464,7 +464,7 @@ components:
         email:
           type: string
           format: email
-          example: nosbelm@qq.com
+          example: jxs121@gmail.com
         phone:
           type: string
           example: 18128845xxx
@@ -499,7 +499,7 @@ components:
         email:
           type: string
           format: email
-          example: nosbelm@qq.com
+          example: jxs121@gmail.com
         phone:
           type: string
           example: 18128845xxx
@@ -513,7 +513,7 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/UserInfo'
+            $ref: "#/components/schemas/UserInfo"
     UserInfo:
       type: object
       properties:
@@ -530,7 +530,7 @@ components:
         email:
           type: string
           format: email
-          example: nosbelm@qq.com
+          example: jxs121@gmail.com
         phone:
           type: string
           example: 18128845xxx
@@ -550,7 +550,7 @@ components:
       properties:
         title:
           type: string
-          example: 'introduction to a good go practical project: miniblog'
+          example: "introduction to a good go practical project: miniblog"
         content:
           type: string
           example: "Details see https://github.com/marmotedu/miniblog/blob/master/README.md"
@@ -571,7 +571,7 @@ components:
           example: post-22z9jl
         title:
           type: string
-          example: 'introduction to a good go practical project: miniblog'
+          example: "introduction to a good go practical project: miniblog"
         content:
           type: string
           example: "Details see https://github.com/marmotedu/miniblog/blob/master/README.md"
@@ -594,7 +594,7 @@ components:
           example: post-22z9jl
         title:
           type: string
-          example: 'introduction to a good go practical project: miniblog'
+          example: "introduction to a good go practical project: miniblog"
         content:
           type: string
           example: "Details see https://github.com/marmotedu/miniblog/blob/master/README.md"
@@ -611,7 +611,7 @@ components:
       properties:
         title:
           type: string
-          example: 'introduction to a good go practical project: miniblog'
+          example: "introduction to a good go practical project: miniblog"
         content:
           type: string
           example: "Details see https://github.com/marmotedu/miniblog/blob/master/README.md"
@@ -625,7 +625,7 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/PostInfo'
+            $ref: "#/components/schemas/PostInfo"
     ErrResponse:
       type: object
       properties:

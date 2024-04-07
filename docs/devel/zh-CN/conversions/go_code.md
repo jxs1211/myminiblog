@@ -81,7 +81,7 @@ type User struct{
 
 user := User{
 	Username: "belm",
-	Email: "nosbelm@qq.com",
+	Email: "jxs121@gmail.com",
 }
 ```
 
@@ -341,7 +341,7 @@ type User struct {
 // 多行初始化
 u := User{
     UserName: "belm",
-    Email:    "nosbelm@qq.com",
+    Email:    "jxs121@gmail.com",
 }
 ```
 

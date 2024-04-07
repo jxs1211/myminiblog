@@ -1,4 +1,4 @@
-// Copyright 2022 Innkeeper Belm(孔令飞) <nosbelm@qq.com>. All rights reserved.
+// Copyright 2022 Innkeeper Jayflow <jxs121@gmail.com>. All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file. The original repo for
 // this file is https://github.com/marmotedu/miniblog.
@@ -28,7 +28,7 @@ func fakeUser(id int64) *model.UserM {
 		Username:  fmt.Sprintf("belm%d", id),
 		Password:  fmt.Sprintf("belm%d", id),
 		Nickname:  fmt.Sprintf("belm%d", id),
-		Email:     "nosbelm@qq.com",
+		Email:     "jxs121@gmail.com",
 		Phone:     "18188888xxx",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),

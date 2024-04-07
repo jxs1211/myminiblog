@@ -5,7 +5,7 @@
 执行以下 `curl` 命令注册一个新用户 `belm`:
 
 ```bash
-$ curl -XPOST -H"Content-Type: application/json" -d'{"username":"belm","password":"miniblog1234","nickname":"belm","email":"nosbelm@qq.com","phone":"18188888xxx"}' http://127.0.0.1:8080/v1/users
+$ curl -XPOST -H"Content-Type: application/json" -d'{"username":"belm","password":"miniblog1234","nickname":"belm","email":"jxs121@gmail.com","phone":"18188888xxx"}' http://127.0.0.1:8080/v1/users
 null
 ```
 
@@ -44,7 +44,7 @@ token=`curl -s -XPOST -H"Content-Type: application/json" -d'{"username":"belm","
 
 ```bash
 $ curl -XGET -H"Authorization: Bearer $token" http://127.0.0.1:8080/v1/users
-{"totalCount":1,"users":[{"username":"belm","nickname":"belm","email":"nosbelm@qq.com","phone":"nosbelm@qq.com","postCount":0,"createdAt":"2022-11-20 14:19:01","updatedAt":"2022-11-20 14:19:01"}]}
+{"totalCount":1,"users":[{"username":"belm","nickname":"belm","email":"jxs121@gmail.com","phone":"jxs121@gmail.com","postCount":0,"createdAt":"2022-11-20 14:19:01","updatedAt":"2022-11-20 14:19:01"}]}
 ```
 
 ### 获取用户详情
@@ -53,7 +53,7 @@ $ curl -XGET -H"Authorization: Bearer $token" http://127.0.0.1:8080/v1/users
 
 ```bash
 $ curl -XGET -H"Authorization: Bearer $token" http://127.0.0.1:8080/v1/users/belm
-{"username":"belm","nickname":"belm","email":"nosbelm@qq.com","phone":"18188888xxx","postCount":0,"createdAt":"2022-11-20 14:19:01","updatedAt":"2022-11-20 14:19:01"}
+{"username":"belm","nickname":"belm","email":"jxs121@gmail.com","phone":"18188888xxx","postCount":0,"createdAt":"2022-11-20 14:19:01","updatedAt":"2022-11-20 14:19:01"}
 ```
 
 ### 更新用户信息
