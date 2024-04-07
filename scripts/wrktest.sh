@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2020 Lingfei Kong <colin404@foxmail.com>. All rights reserved.
+# Copyright 2020 Jayflow <jxs1211@gmail.com>. All rights reserved.
 # Use of this source code is governed by a MIT style
 # license that can be found in the LICENSE file.
 
@@ -50,7 +50,7 @@ OPTIONS:
   -n                     Performance test task name, default: miniblog
   -d                     Directory used to store performance data and gnuplot graphic, default: _output/wrk
 
-Reprot bugs to <colin404@foxmail.com>.
+Reprot bugs to <jxs121@gmail.com>.
 EOF
 }
 
