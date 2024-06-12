@@ -36,5 +36,5 @@ log:
   level: debug # 指定日志级别，可选值：debug, info, warn, error, dpanic, panic, fatal
   format: console # 指定日志显示格式，可选值：console, json
   output-paths: # 指定日志输出位置，多个输出，用 `逗号 + 空格` 分开。stdout：标准输出，
-    - D:\shen\go\open_source\miniblog.log
+    - /etc/miniblog/miniblog.log
     - stdout

@@ -1,0 +1,94 @@
+package tips
+
+import (
+	"errors"
+	"os"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+type mockFile struct {
+	*os.File
+	mockClose func() error
+	clean     func(name string) error
+}
+
+func (m *mockFile) Close() (err error) {
+	defer func() {
+		if m.clean != nil {
+			err = errors.Join(err, m.clean(m.Name()))
+		}
+	}()
+	if m.mockClose != nil {
+		return m.mockClose()
+	}
+	return m.File.Close()
+}
+
+func TestDoSomething(t *testing.T) {
+	tests := []struct {
+		name        string
+		fileExists  bool
+		file        *mockFile
+		wantErr     error
+		expectedErr error
+	}{
+		{
+			name:       "file exists",
+			fileExists: true,
+			file: &mockFile{
+				File:  os.NewFile(1, "test_file.txt"),
+				clean: os.Remove,
+			},
+			wantErr: nil,
+		},
+		// {
+		// 	name:        "file does not exist",
+		// 	fileExists:  false,
+		// 	wantErr:     os.ErrNotExist,
+		// 	expectedErr: os.ErrNotExist,
+		// },
+		// {
+		// 	name:        "error closing file",
+		// 	fileExists:  true,
+		// 	wantErr:     errors.New("failed to close file"),
+		// 	expectedErr: errors.New("failed to close file"),
+		// },
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Create a temporary file if needed
+			// var file *mockFile
+			// var err error
+			// if tt.fileExists {
+			// 	file.File, err = os.CreateTemp("", "test_file.txt")
+			// 	assert.NoError(t, err)
+			// 	defer os.Remove(file.Name())
+			// }
+
+			// Mock the file.Close function if needed
+			// if tt.expectedErr != nil {
+			// 	originalClose := file.Close
+			// 	file.Close = func() error {
+			// 		defer func() { file.Close = originalClose }()
+			// 		err := originalClose()
+			// 		if err != nil {
+			// 			return errors.Join(err, tt.expectedErr)
+			// 		}
+			// 		return tt.expectedErr
+			// 	}
+			// }
+			err := doSomething()
+			println(err)
+
+			// Check the error
+			if tt.wantErr == nil {
+				assert.NoError(t, err)
+			} else {
+				assert.EqualError(t, err, tt.wantErr.Error())
+			}
+		})
+	}
+}
