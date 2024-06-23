@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -91,4 +92,21 @@ func TestDoSomething(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestSingleFlight(t *testing.T) {
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+
+	// the next calls will shared the result of the first executed call if the wait timeout is less than the actual time duration of the function call
+	// if the time durtaion of the function call is 3s, the sleep time is 2s, the next calls shared the result
+	// if the time durtaion of the function call is 3s, the sleep time is 5s, the shared result won't happen
+	time.Sleep(5 * time.Second)
+
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+
+	time.Sleep(3 * time.Second)
 }

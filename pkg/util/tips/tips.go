@@ -10,6 +10,8 @@ import (
 	"syscall"
 	"testing"
 	"time"
+
+	"golang.org/x/sync/singleflight"
 )
 
 func workIn2Minute() {
@@ -35,6 +37,7 @@ func doWork(ctx context.Context, d time.Duration) {
 	}
 }
 
+//nolint:unused
 func doWork2(ctx context.Context, d time.Duration) {
 	// now := time.Now()
 	delay := time.NewTicker(d)
@@ -121,4 +124,33 @@ func Sleep(ctx context.Context, d time.Duration) {
 		return
 	case <-t.C:
 	}
+}
+
+func FetchExpensiveData() (int64, error) {
+	fmt.Println("FetchExpensiveData called", time.Now())
+	time.Sleep(3 * time.Second)
+	return time.Now().Unix(), nil
+}
+
+var group singleflight.Group
+
+func UsingSingleFlight(key string) {
+	v, _, _ := group.Do(key, func() (interface{}, error) {
+		return FetchExpensiveData()
+	})
+	fmt.Println(v)
+}
+
+func DoSingleFlight() {
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+
+	time.Sleep(2 * time.Second)
+
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+	go UsingSingleFlight("key")
+
+	time.Sleep(2 * time.Second)
 }
