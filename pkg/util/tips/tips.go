@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"testing"
 	"time"
@@ -153,4 +154,34 @@ func DoSingleFlight() {
 	go UsingSingleFlight("key")
 
 	time.Sleep(2 * time.Second)
+}
+
+var (
+	instance *Config
+	once     sync.Once
+	onceFunc = sync.OnceFunc(func() {
+		fmt.Println("init config")
+		instance = loadConfig()
+	})
+)
+
+type Config struct{}
+
+func loadConfig() *Config {
+	return &Config{}
+}
+func GetConfig() *Config {
+	// defer mu.Unlock()
+	// mu.Lock()
+	once.Do(func() {
+		fmt.Println("init config")
+		instance = loadConfig()
+	})
+
+	return instance
+}
+
+func GetConfigOnce() {
+	onceFunc()
+	onceFunc()
 }

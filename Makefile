@@ -1,15 +1,15 @@
-# 默认执行 all 目标
+# Default to execute the 'all' target
 .DEFAULT_GOAL := all
 
 # ==============================================================================
-# 定义 Makefile all 伪目标，执行 `make` 时，会默认会执行 all 伪目标
+# Define the Makefile all phony target, which will be executed by default when `make` is run
 .PHONY: all
 all: gen.add-copyright go.format go.lint go.cover go.build
 
 # ==============================================================================
 # Includes
 
-# 确保 `include common.mk` 位于第一行，common.mk 中定义了一些变量，后面的子 makefile 有依赖
+# Ensure `include common.mk` is on the first line, common.mk defines some variables that subsequent sub-makefiles depend on
 include scripts/make-rules/common.mk 
 include scripts/make-rules/tools.mk
 include scripts/make-rules/golang.mk
@@ -41,19 +41,19 @@ export USAGE_OPTIONS
 ##@ generate:
 
 .PHONY: add-copyright
-add-copyright: ## 添加版权头信息.
+add-copyright: ## Add copyright header information.
 	@$(MAKE) gen.add-copyright
 
 .PHONY: ca
-ca: ## 生成 CA 文件.
+ca: ## Generate CA files.
 	@$(MAKE) gen.ca
 
 .PHONY: protoc
-protoc: ## 编译 protobuf 文件.
+protoc: ## Compile protobuf files.
 	@$(MAKE) gen.protoc
 
 .PHONY: deps
-deps: ## 安装依赖，例如：生成需要的代码、安装需要的工具等.
+deps: ## Install dependencies, such as generating required code, installing necessary tools, etc.
 	@$(MAKE) gen.deps
 
 ## --------------------------------------
@@ -63,15 +63,15 @@ deps: ## 安装依赖，例如：生成需要的代码、安装需要的工具�
 ##@ build:
 
 .PHONY: build
-build: go.tidy  ## 编译源码，依赖 tidy 目标自动添加/移除依赖包.
+build: go.tidy  ## Compile source code, depends on the tidy target to automatically add/remove dependencies.
 	@$(MAKE) go.build
 
 .PHONY: image
-image: ## 构建 Docker 镜像.
+image: ## Build Docker images.
 	@$(MAKE) image.build
 
 .PHONY: push
-push: ## 构建 Docker 镜像，并 push 到镜像仓库.
+push: ## Build Docker images and push to the image repository.
 	@$(MAKE) image.push
 
 ## --------------------------------------
@@ -81,7 +81,7 @@ push: ## 构建 Docker 镜像，并 push 到镜像仓库.
 ##@ clean:
 
 .PHONY: clean
-clean: ## 清理构建产物、临时文件等.
+clean: ## Clean up build artifacts, temporary files, etc.
 	@echo "===========> Cleaning all build output"
 	@-rm -vrf $(OUTPUT_DIR)
 
@@ -93,7 +93,7 @@ clean: ## 清理构建产物、临时文件等.
 ##@ lint and verify:
 
 .PHONY: lint
-lint: ## 执行静态代码检查.
+lint: ## Perform static code analysis.
 	@$(MAKE) go.lint
 
 
@@ -104,11 +104,11 @@ lint: ## 执行静态代码检查.
 ##@ test:
 
 .PHONY: test 
-test: ## 执行单元测试.
+test: ## Run unit tests.
 	@$(MAKE) go.test
 
 .PHONY: cover 
-cover: ## 执行单元测试，并校验覆盖率阈值.
+cover: ## Run unit tests and check coverage thresholds.
 	@$(MAKE) go.cover
 
 
@@ -119,18 +119,18 @@ cover: ## 执行单元测试，并校验覆盖率阈值.
 ##@ hack/tools:
 
 .PHONY: format
-format:  ## 格式化 Go 源码.
+format:  ## Format Go source code.
 	@$(MAKE) go.format
 
 .PHONY: swagger
-swagger: tools.verify.swagger ## 启动 swagger 在线文档（监听端口：65534）.
+swagger: tools.verify.swagger ## Start swagger online documentation (listening port: 65534).
 	@swagger serve -F=swagger --no-open --port 65534 $(ROOT_DIR)/api/openapi/openapi.yaml
 
 .PHONY: tidy
-tidy: ## 自动添加/移除依赖包.
+tidy: ## Automatically add/remove dependencies.
 	@$(MAKE) go.tidy
 
 .PHONY: help
-help: Makefile ## 打印 Makefile help 信息.
+help: Makefile ## Print Makefile help information.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<TARGETS> <OPTIONS>\033[0m\n\n\033[35mTargets:\033[0m\n"} /^[0-9A-Za-z._-]+:.*?##/ { printf "  \033[36m%-45s\033[0m %s\n", $$1, $$2 } /^\$$\([0-9A-Za-z_-]+\):.*?##/ { gsub("_","-", $$1); printf "  \033[36m%-45s\033[0m %s\n", tolower(substr($$1, 3, length($$1)-7)), $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' Makefile #$(MAKEFILE_LIST)
 	@echo -e "$$USAGE_OPTIONS"

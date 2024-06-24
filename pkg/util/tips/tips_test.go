@@ -110,3 +110,15 @@ func TestSingleFlight(t *testing.T) {
 
 	time.Sleep(3 * time.Second)
 }
+
+func TestLoadConfigOnce(t *testing.T) {
+	GetConfig()
+	GetConfig()
+}
+
+func TestGetConfigOnce(t *testing.T) {
+	assert.Nil(t, instance)
+	GetConfigOnce()
+	GetConfigOnce()
+	assert.NotNil(t, instance)
+}
