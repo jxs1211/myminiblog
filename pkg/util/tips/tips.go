@@ -12,6 +12,7 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/singleflight"
 )
 
@@ -184,4 +185,28 @@ func GetConfig() *Config {
 func GetConfigOnce() {
 	onceFunc()
 	onceFunc()
+}
+
+func errorGroup() {
+	urls := []string{
+		"https://blog.devtrovert.com",
+		"https://example.com",
+	}
+	fetch := func(url string) error {
+		fmt.Println("fetching", url)
+		time.Sleep(time.Second)
+		return nil
+	}
+	var g errgroup.Group
+
+	for _, url := range urls {
+		url := url // safe before Go 1.22
+		g.Go(func() error {
+			return fetch(url)
+		})
+	}
+
+	if err := g.Wait(); err != nil {
+		log.Fatal(err)
+	}
 }

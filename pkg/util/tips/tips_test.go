@@ -122,3 +122,7 @@ func TestGetConfigOnce(t *testing.T) {
 	GetConfigOnce()
 	assert.NotNil(t, instance)
 }
+
+func TestErrorGroup(t *testing.T) {
+	errorGroup()
+}
