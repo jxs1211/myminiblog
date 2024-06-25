@@ -42,6 +42,7 @@ func initConfig() {
 
 		// Add the current directory to the configuration file search paths.
 		viper.AddConfigPath(".")
+		viper.AddConfigPath("./configs")
 
 		// Set the configuration file format to YAML (YAML format is clear and readable, and supports complex configuration structures).
 		viper.SetConfigType("yaml")

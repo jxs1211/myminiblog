@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"runtime"
 	"sync"
 	"syscall"
 	"testing"
@@ -210,3 +211,42 @@ func errorGroup() {
 		log.Fatal(err)
 	}
 }
+
+func maxprocs() {
+	fmt.Println("GOMAXPROCS:", runtime.GOMAXPROCS(0))
+	fmt.Println("NumCPU: ", runtime.NumCPU())
+}
+
+type user struct {
+	name string
+}
+
+type MyStruct struct {
+	mu sync.Mutex
+}
+
+func (s *MyStruct) DoSomething() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+}
+
+type Lockable[T any] struct {
+	sync.Mutex
+	Value T
+}
+
+func (l *Lockable[T]) SetValue(v T) {
+	l.Lock()
+	defer l.Unlock()
+
+	l.Value = v
+}
+
+func (l *Lockable[T]) GetValue() T {
+	l.Lock()
+	defer l.Unlock()
+
+	return l.Value
+}
+
+type User Lockable[user]

@@ -6,29 +6,19 @@
 package main
 
 import (
-	"context"
-	"log"
+	"fmt"
 	"os"
-	"os/signal"
-	"syscall"
-	"time"
+	"runtime"
 
 	// _ "go.uber.org/automaxprocs"
 
 	"github.com/marmotedu/miniblog/internal/miniblog"
-	"github.com/marmotedu/miniblog/pkg/util/tips"
 )
 
 func main() {
-	// start()
-	context, cancel := context.WithCancel(context.Background())
-	go tips.Job3(context, 5*time.Second)
-	// time.Sleep(60 * time.Second)
-	sig := make(chan os.Signal, 1)
-	signal.Notify(sig, syscall.SIGINT)
-	<-sig
-	cancel()
-	log.Println("exit")
+	fmt.Println("GOMAXPROCS:", runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.NumCPU())
+	start()
 }
 
 func start() {

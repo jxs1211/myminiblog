@@ -2,6 +2,7 @@ package tips
 
 import (
 	"errors"
+	"log"
 	"os"
 	"testing"
 	"time"
@@ -125,4 +126,21 @@ func TestGetConfigOnce(t *testing.T) {
 
 func TestErrorGroup(t *testing.T) {
 	errorGroup()
+}
+func TestMaxProcs(t *testing.T) {
+	maxprocs()
+}
+
+type IntLockable Lockable[int]
+
+func TestLockable(t *testing.T) {
+	// directly use
+	var safeUser Lockable[user]
+	safeUser.SetValue(user{name: "test"})
+	log.Println("user: ", safeUser.GetValue())
+
+	// or make a new type
+	var safeInt Lockable[int]
+	safeInt.SetValue(1)
+	log.Println("int: ", safeInt.GetValue())
 }
